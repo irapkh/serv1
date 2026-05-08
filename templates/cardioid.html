@@ -1,0 +1,52 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Кардиоида - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>❤️ Кардиоида</h2>
+    <form method="POST">
+        <div class="row">
+            <div>
+                <div class="input-group">
+                    <label>Размер:</label>
+                    <input type="number" name="size" value="{{ size if size is not none else 2 }}" step="0.5" required>
+                </div>
+                <div class="input-group">
+                    <label>Степень для x:</label>
+                    <input type="number" name="power_x" value="{{ power_x if power_x is not none else 1 }}" step="0.5" required>
+                </div>
+                <div class="input-group">
+                    <label>Степень для y:</label>
+                    <input type="number" name="power_y" value="{{ power_y if power_y is not none else 1 }}" step="0.5" required>
+                </div>
+                <button type="submit">Построить график</button>
+            </div>
+            <div class="info">
+                <h3>📐 Инструкция:</h3>
+                <p>Размер - масштаб кривой<br>
+                Степени для x и y - целые числа<br>
+                Влияют на форму кардиоиды<br>
+                    Функция:<br>
+                    r = size * (1 - np.cos(theta))<br>
+                    x = r * np.cos(theta) ** power_x<br>
+                y = r * np.sin(theta) ** power_y<br>
+                    Пояснение:<br>
+                    theta - перебираемый угол в радианах от 0 до 2Пи<br>
+                    r - размер<br>
+                    power_x - степень для x<br>
+                    power_y - степень для y<br>
+                </p>
+            </div>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% elif image %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ image }}" alt="Кардиоида">
+        </div>
+    {% endif %}
+{% endblock %}

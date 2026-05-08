@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+
+{% block title %}3D функция - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>🌍 3D функция z = f(x, y)</h2>
+    <form method="POST">
+        <div class="row">
+            <div>
+                <div class="input-group">
+                    <label>Функция f(x, y):</label>
+                    <textarea name="function" rows="3" required>{{ func_str if func_str else 'sin(sqrt(x**2 + y**2))' }}</textarea>
+                </div>
+                <div class="input-group">
+                    <label>Диапазон x (мин, макс, шаг):</label>
+                    <input type="text" name="x_range" value="{{ x_range }}" placeholder="-5,5,0.5">
+                </div>
+                <div class="input-group">
+                    <label>Диапазон y (мин, макс, шаг):</label>
+                    <input type="text" name="y_range" value="{{ y_range }}" placeholder="-5,5,0.5">
+                </div>
+                <button type="submit">Построить график</button>
+            </div>
+            <div class="info">
+                <h3>📐 Доступные функции:</h3>
+                <p>sin(x), cos(x), tan(x), sqrt(x), abs(x), exp(x), pi<br>
+                Примеры: sin(sqrt(x**2+y**2)), cos(x)*sin(y), x**2 - y**2</p>
+            </div>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% elif image %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ image }}" alt="3D график">
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Вход - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>Вход в систему</h2>
+    <p style="margin-bottom: 20px; color: #666;">Введите ваши данные для входа</p>
+
+    <form method="POST">
+        <div class="input-group">
+            <label>Nickname:</label>
+            <input type="text" name="nickname" placeholder="Введите ваш nickname" required autofocus>
+        </div>
+
+        <div class="input-group">
+            <label>Пароль:</label>
+            <input type="password" name="password" placeholder="Введите пароль" required>
+        </div>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <button type="submit">Войти</button>
+        <a href="/register" style="margin-left: 15px; color: #667eea;">Нет аккаунта? Зарегистрироваться</a>
+    </form>
+{% endblock %}

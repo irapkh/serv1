@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+
+{% block title %}Эллипс - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>⚪ Эллипс</h2>
+    <form method="POST">
+        <div class="row">
+            <div>
+                <div class="input-group">
+                    <label>Большая полуось a:</label>
+                    <input type="number" name="a" value="{{ a if a is not none else 5 }}" step="0.5" required>
+                </div>
+                <div class="input-group">
+                    <label>Малая полуось b:</label>
+                    <input type="number" name="b" value="{{ b if b is not none else 3 }}" step="0.5" required>
+                </div>
+                <button type="submit">Построить график</button>
+            </div>
+            <div class="info">
+                <h3>📐 Инструкция:</h3>
+                <p>Большая и малая полуоси - целые или дробные числа<br>
+                a ≥ b для горизонтального эллипса<br>
+                t - это перебираемый угол в радианах от 0 до 2Пи<br>
+            x = a * cos(t)<br>
+            y = b * sin(t)</p>
+            </div>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% elif image %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ image }}" alt="Эллипс">
+        </div>
+    {% endif %}
+{% endblock %}

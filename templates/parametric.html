@@ -1,0 +1,55 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Параметрическая 3D - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>🎨 Параметрическая 3D поверхность</h2>
+    <form method="POST">
+        <div class="row">
+            <div>
+                <div class="input-group">
+                    <label>Длина a:</label>
+                    <input type="number" name="a" value="{{ a if a is not none else 5 }}" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label>Ширина b:</label>
+                    <input type="number" name="b" value="{{ b if b is not none else 5 }}" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label>Высота c:</label>
+                    <input type="number" name="c" value="{{ c if c is not none else 5 }}" step="0.5">
+                </div>
+                <div class="input-group">
+                    <label>Функция X(u,v):</label>
+                    <input type="text" name="x_func" value="{{ x_func if x_func else 'a * sin(v) * cos(u)' }}" required>
+                </div>
+                <div class="input-group">
+                    <label>Функция Y(u,v):</label>
+                    <input type="text" name="y_func" value="{{ y_func if y_func else 'b * sin(v) * sin(u)' }}" required>
+                </div>
+                <div class="input-group">
+                    <label>Функция Z(u,v):</label>
+                    <input type="text" name="z_func" value="{{ z_func if z_func else 'c * cos(v)' }}" required>
+                </div>
+                <button type="submit">Построить график</button>
+            </div>
+            <div class="info">
+                <h3>📐 Инструкция:</h3>
+                <p><strong>a, b, c</strong> - масштабные коэффициенты<br>
+                <strong>u, v</strong> - параметры (от 0 до 2π и 0 до π)<br>
+                Доступны функции: sin, cos, tan, sqrt, abs, pi<br>
+                Пример: сфера (sin(v)*cos(u), sin(v)*sin(u), cos(v))</p>
+            </div>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% elif image %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ image }}" alt="Параметрическая 3D поверхность">
+        </div>
+    {% endif %}
+{% endblock %}

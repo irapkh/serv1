@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация - ГрафЛаб{% endblock %}
+
+{% block content %}
+    <h2>Регистрация</h2>
+    <p style="margin-bottom: 20px; color: #666;">Создайте новый аккаунт</p>
+
+    <form method="POST">
+        <div class="input-group">
+            <label>Nickname:</label>
+            <input type="text" name="nickname" placeholder="Введите ваш nickname" required autofocus>
+        </div>
+
+        <div class="input-group">
+            <label>Пароль:</label>
+            <input type="password" name="password" placeholder="Минимум 4 символа" required>
+        </div>
+
+        <div class="input-group">
+            <label>Дата рождения (was born):</label>
+            <input type="date" name="birth_date" required>
+            <small style="color: #666; display: block; margin-top: 5px;">Формат: ГГГГ-ММ-ДД</small>
+        </div>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <button type="submit">Зарегистрироваться</button>
+
+    </form>
+
+
+{% endblock %}

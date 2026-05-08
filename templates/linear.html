@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+
+{% block title %}Линейная функция - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>📈 Линейная функция y = kx + b</h2>
+    <form method="POST">
+        <div class="row">
+            <div>
+                <div class="input-group">
+                    <label>Коэффициент k (наклон):</label>
+                    <input type="number" name="k" value="{{ k if k is not none else 2 }}" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label>Свободный член b (пересечение с Y):</label>
+                    <input type="number" name="b" value="{{ b if b is not none else 3 }}" step="0.1" required>
+                </div>
+                <button type="submit">Построить график</button>
+            </div>
+            <div class="info">
+                <h3>📐 Инструкция:</h3>
+                <p><strong>k</strong> - влияет на наклон графика<br>
+                <strong>b</strong> - координата y, в которой график пересекает ось ординат<br>
+                Параметры могут быть нецелыми (используйте точку)<br>
+                    Функция: <br>
+                y = k * x + b</p>
+
+            </div>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% elif image %}
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ image }}" alt="График линейной функции">
+        </div>
+    {% endif %}
+{% endblock %}

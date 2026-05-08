@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+
+{% block title %}Главная - Построитель графиков{% endblock %}
+
+{% block content %}
+    <h2>Добро пожаловать, {{ nickname }}!</h2>
+    <p>Выберите тип графика из меню выше.</p>
+    <div class="info" style="margin-top: 20px;">
+        <h3>📌 Доступные функции:</h3>
+        <ul>
+            <li><strong>Линейная функция</strong> - y = kx + b</li>
+            <li><strong>Тригонометрические функции</strong> - sin, cos, tan и их комбинации</li>
+            <li><strong>Кардиоида</strong> - кривая в полярных координатах</li>
+            <li><strong>Эллипс</strong> - x²/a² + y²/b² = 1</li>
+            <li><strong>3D функция</strong> - поверхность z = f(x, y)</li>
+            <li><strong>Параметрическая 3D</strong> - параметрическая поверхность</li>
+        </ul>
+    </div>
+{% endblock %}
